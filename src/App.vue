@@ -8,7 +8,7 @@
         Sistema Copa do Mundo 2022 - Catar
       </h3>
       <div class="container">
-        <div class="p-5">
+        <div class="p-md-5">
           <RouterView />
         </div>
       </div>

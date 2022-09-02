@@ -34,3 +34,31 @@ body {
 a {
   text-decoration: none;
 }
+
+.VueTables__limit-field {
+  margin: 25px;
+  width: 25%;
+}
+
+.page-link {
+  font-weight: 700;
+  color: var(--color-text) !important;
+}
+
+.active {
+  background-color: var(--vt-c-indigo) !important;
+  border-color: var(--vt-c-indigo) !important;
+  color: var(--vt-c-white) !important;
+}
+
+.VueTables__table > thead > tr > th > span{
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--vt-c-indigo) !important;
+  border-color: var(--vt-c-indigo) !important;
+  font-weight: 700;
+}
