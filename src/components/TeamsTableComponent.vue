@@ -1,6 +1,6 @@
 <template>
   <div class="d-block">
-    <div class="w-100 d-flex justify-content-center">
+    <div class="w-100 d-flex justify-content-center mb-3">
       <button
         class="btn btn-primary"
         @click="$emit('changeView', 'TeamsFormComponent')"
@@ -8,32 +8,25 @@
         Adicionar Seleção
       </button>
     </div>
-    <v-client-table :data="tableData" :columns="columns" :options="options" />
+    <v-client-table :data="tableData" :columns="columns" :options="options">
+      <template v-slot:image="{ row }">
+        <img width="50" :src="row.image" />
+      </template>
+    </v-client-table>
   </div>
 </template>
 
 <script>
+import { mainStore } from "@/stores/mainStore";
+const store = mainStore();
 export default {
   emits: ["changeView"],
-  data() {
+  setup() {
     return {
-      columns: ["id", "name", "age"],
-      tableData: [
-        { id: 1, name: "John", age: "20" },
-        { id: 2, name: "Jane", age: "24" },
-        { id: 3, name: "Susan", age: "16" },
-        { id: 4, name: "Chris", age: "55" },
-        { id: 1, name: "John", age: "20" },
-        { id: 2, name: "Jane", age: "24" },
-        { id: 3, name: "Susan", age: "16" },
-        { id: 4, name: "Chris", age: "55" },
-        { id: 5, name: "Dan", age: "40" },
-        { id: 1, name: "John", age: "20" },
-        { id: 2, name: "Jane", age: "24" },
-        { id: 3, name: "Susan", age: "16" },
-        { id: 4, name: "Chris", age: "55" },
-      ],
+      columns: ["image", "id", "name"],
+      tableData: store.teams,
       options: {
+        editableColumns: ["image"],
         filterByColumn: true,
         texts: {
           count:
@@ -56,4 +49,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.VueTables__table > thead > tr:first-child {
+  width: 50px !important;
+}
+</style>

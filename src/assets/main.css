@@ -62,3 +62,8 @@ a {
   border-color: var(--vt-c-indigo) !important;
   font-weight: 700;
 }
+
+.card {
+  background: var(--vt-c-text-dark-2);
+  border:0px;
+}
