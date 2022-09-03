@@ -10,7 +10,9 @@
     </div>
     <v-client-table :data="tableData" :columns="columns" :options="options">
       <template v-slot:image="{ row }">
-        <img width="50" :src="row.image" />
+        <div class="w-100 d-flex justify-content-center">
+          <img width="50" :src="row.image" />
+        </div>
       </template>
     </v-client-table>
   </div>
@@ -25,32 +27,14 @@ export default {
     return {
       columns: ["image", "id", "name"],
       tableData: store.teams,
-      options: {
-        editableColumns: ["image"],
-        filterByColumn: true,
-        texts: {
-          count:
-            "Mostrando de {from} a {to} de um total de {count} itens |{count} Itens |Um Item ",
-          first: "Primeiro",
-          last: "Último",
-          filter: "Filtrar:",
-          filterPlaceholder: "Buscar",
-          limit: "Itens:",
-          page: "Page:",
-          noResults: "Nenhum item encontrado",
-          filterBy: "Filtrar por {column}",
-          loading: "Carregando...",
-          defaultOption: "Selecionar {column}",
-          columns: "Coluna",
-        },
-      },
+      options: store.tableConfig,
     };
   },
 };
 </script>
 
 <style>
-.VueTables__table > thead > tr:first-child {
-  width: 50px !important;
+.VueTables__table > thead > tr > th {
+  width: 10px !important;
 }
 </style>

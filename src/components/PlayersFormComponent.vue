@@ -1,26 +1,35 @@
 <template>
   <form @submit.prevent="Save()" @reset="Cancel()">
     <div class="row">
-      <div class="mb-3 col-md-6">
+     <div class="mb-3 col-md-4">
+        <label class="form-label">Seleções</label>
+        <select class="form-select" v-model="team_id" required>
+          <option value="" selected>Escolha uma Seleção</option>
+          <option v-for="(team, index) in teams" :value="team.id" :key="index">
+            {{ team.name }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3 col-md-4">
         <label class="form-label">Nome</label>
         <input
           type="text"
           class="form-control"
-          placeholder="Nome da Seleção"
+          placeholder="Nome do Jogador"
           required
           v-model="name"
         />
       </div>
-      <div class="mb-3 col-md-6">
-        <label for="formFile" class="form-label">Escudo</label>
+      <div class="mb-3 col-md-4">
+        <label class="form-label">Número</label>
         <input
+          type="number"
+          step="1"
+          min="1"
           class="form-control"
-          type="file"
-          id="formFile"
-          @change="imgToBase64($event.target)"
-          accept="image/png, image/gif, image/jpeg"
+          placeholder="Número do Jogador"
+          v-model="number"
         />
-        <small>Dimensões máximas recomendadas 400x400</small>
       </div>
     </div>
     <button class="btn btn-primary m-1" type="submit">Salvar</button>
@@ -35,22 +44,19 @@ const store = mainStore();
 export default {
   emits: ["changeView"],
 
-  data() {
+  setup() {
     return {
+      teams: store.teams,
       name: "",
-      image: "",
-      validation: false,
+      number: "",
+      team_id: "",
     };
   },
 
   methods: {
     async Save() {
-      this.formValidation();
-      if (this.validation === true)
-        return this.$toast.error(`Imagem com dimensões além do recomendado !`);
-
       const formItens = this.mountForm();
-      const response = await store.postTeams(formItens);
+      const response = await store.postPlayers(formItens);
       if (response) {
         this.emitChangeView();
         this.$toast.success(`Dados salvos com sucesso !`);
@@ -73,17 +79,14 @@ export default {
     },
 
     emitChangeView() {
-      this.$emit("changeView", "TeamsTableComponent");
-    },
-
-    formValidation() {
-      this.validation = this.image.length > 65535;
+      this.$emit("changeView", "PlayersTableComponent");
     },
 
     mountForm() {
       const setData = JSON.stringify({
         name: this.name,
-        image: this.image,
+        number: this.number,
+        team_id: this.team_id,
       });
       return setData;
     },

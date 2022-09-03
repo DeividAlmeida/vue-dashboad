@@ -41,6 +41,8 @@ export default {
 
   mounted() {
     this.store.getTeams();
+    this.store.getPlayers();
+    this.store.getMatchs();
   },
 };
 </script>
