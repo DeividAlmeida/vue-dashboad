@@ -23,9 +23,16 @@ export default {
   emits: ["changeView"],
   setup() {
     return {
-      columns: ["id", "name", "number", "seleção"],
+      columns: ["id", "name", "number", "team"],
       tableData: store.players,
-      options: store.tableConfig,
+      options: {
+        ...store.tableConfig,
+        headings: {
+          name: "Nome",
+          number: "Número",
+          team: "Seleção",
+        },
+      },
     };
   },
 };

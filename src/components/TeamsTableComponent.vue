@@ -27,7 +27,13 @@ export default {
     return {
       columns: ["image", "id", "name"],
       tableData: store.teams,
-      options: store.tableConfig,
+      options: {
+        ...store.tableConfig,
+        headings: {
+          image: "Imagem",
+          name: "Nome",
+        },
+      },
     };
   },
 };

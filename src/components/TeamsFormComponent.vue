@@ -77,7 +77,8 @@ export default {
     },
 
     formValidation() {
-      this.validation = this.image.length > 65535;
+      const databaseLimit = 65535;
+      this.validation = this.image.length > databaseLimit;
     },
 
     mountForm() {
