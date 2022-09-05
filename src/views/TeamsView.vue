@@ -20,7 +20,11 @@ export default {
   methods: {
     changeView(view) {
       this.view = view;
-      if (view == "TeamsTableComponent") {
+      this.checkTitle();
+    },
+
+    checkTitle() {
+      if (this.view == "TeamsTableComponent") {
         store.changeTitle("Lista de Seleções");
       } else {
         store.changeTitle("Cadastrar Seleção");
@@ -31,7 +35,7 @@ export default {
     if (store.teams.length === 0) {
       await store.getTeams();
     }
-    this.view = "TeamsTableComponent";
+    this.changeView("TeamsTableComponent");
   },
 };
 </script>

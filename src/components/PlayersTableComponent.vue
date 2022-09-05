@@ -5,14 +5,10 @@
         class="btn btn-primary"
         @click="$emit('changeView', 'PlayersFormComponent')"
       >
-        Adicionar Seleção
+        Adicionar Jogador
       </button>
     </div>
-    <v-client-table :data="tableData" :columns="columns" :options="options">
-      <template v-slot:image="{ row }">
-        <img height="50" :src="row.image" />
-      </template>
-    </v-client-table>
+    <v-client-table :data="tableData" :columns="columns" :options="options" />
   </div>
 </template>
 

@@ -20,7 +20,11 @@ export default {
   methods: {
     changeView(view) {
       this.view = view;
-      if (view == "PlayersTableComponent") {
+      this.checkTitle();
+    },
+
+    checkTitle() {
+      if (this.view == "PlayersTableComponent") {
         store.changeTitle("Lista de Jogadores");
       } else {
         store.changeTitle("Cadastrar Jogador");
@@ -31,7 +35,7 @@ export default {
     if (store.players.length === 0) {
       await store.getPlayers();
     }
-    this.view = "PlayersTableComponent";
+    this.changeView("PlayersTableComponent");
   },
 };
 </script>

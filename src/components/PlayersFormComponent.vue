@@ -70,14 +70,6 @@ export default {
       this.emitChangeView();
     },
 
-    imgToBase64(input) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.image = e.target.result;
-      };
-      reader.readAsDataURL(input.files[0]);
-    },
-
     emitChangeView() {
       this.$emit("changeView", "PlayersTableComponent");
     },
