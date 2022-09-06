@@ -50,6 +50,12 @@ export const mainStore = defineStore("mainStore", {
       this.matchs = data;
     },
 
+    async getTeamPlayers(team_id) {
+      const response = await fetch(`http://127.0.0.1:8000/api/players/${team_id}`);
+      const data = await response.json();
+      return data;
+    },
+
     async postTeams(items) {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/teams", {
