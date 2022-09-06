@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const mainStore = defineStore("mainStore", {
   state: () => ({
-    title: "Seja bem vindo !!" as string,
+    title: "Carregando..." as string,
     teams: [],
     players: [],
     matchs: [],

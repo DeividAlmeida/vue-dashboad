@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import MenuComponent from "@/components/MenuComponent.vue";
-import { mainStore } from "@/stores/mainStore";
+import MenuComponent from "../src/components/MenuComponent.vue";
+import { mainStore } from "../src/stores/mainStore";
 export default {
   setup() {
     const store = mainStore();
