@@ -25,9 +25,9 @@ export default {
 
     checkTitle() {
       if (this.view == "MatchsTableComponent") {
-        store.changeTitle("Lista de Jogos");
+        store.changeTitle("Lista de Partidas");
       } else {
-        store.changeTitle("Cadastrar Jogo");
+        store.changeTitle("Cadastrar Partida");
       }
     },
   },

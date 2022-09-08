@@ -70,6 +70,7 @@
       <div class="mb-3 col-md-6">
         <label class="form-label">Tipo de Log</label>
         <select class="form-select" v-model="log_emoji">
+          <option value="" selected>Escolha uma Opção</option>
           <option value="⚽⬆">Gol</option>
           <option value="⚽⬇">Gol Contra</option>
           <option value="🟨">Cartão Amarelo</option>
@@ -91,7 +92,7 @@
         <input
           type="number"
           class="form-control"
-          placeholder="Escolha o dia e horário do jogo"
+          placeholder="Escolha o dia e horário da patida"
           min="0"
           step="1"
           required
@@ -114,6 +115,32 @@
       <div class="mb-3 col-md-6" v-else-if="log_team == 1">
         <label class="form-label">Jogador</label>
         <select class="form-select" v-model="log_player">
+          <option value="" selected>Escolha um Jogador</option>
+          <option
+            v-for="(player, index) in players_b"
+            :value="player.name"
+            :key="index"
+          >
+            {{ player.name }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3 col-md-6" v-if="log_team == 0 && log_emoji == '🔃'">
+        <label class="form-label">Jogador Substituto</label>
+        <select class="form-select" v-model="log_player_second">
+          <option value="" selected>Escolha um Jogador</option>
+          <option
+            v-for="(player, index) in players_a"
+            :value="player.name"
+            :key="index"
+          >
+            {{ player.name }}
+          </option>
+        </select>
+      </div>
+      <div class="mb-3 col-md-6" v-else-if="log_team == 1 && log_emoji == '🔃'">
+        <label class="form-label">Jogador Substituto</label>
+        <select class="form-select" v-model="log_player_second">
           <option value="" selected>Escolha um Jogador</option>
           <option
             v-for="(player, index) in players_b"
@@ -189,6 +216,7 @@ export default {
       log_emoji: "",
       log_team: "",
       log_player: "",
+      log_player_second: "",
       log_time: "",
     };
   },
@@ -236,8 +264,32 @@ export default {
     },
 
     addLog() {
-      const log = `'${this.log_time} ${this.log_player} ${this.log_emoji}`;
-      console.log(log, this.log_team == 0);
+      let log;
+      switch (this.log_emoji) {
+        case "⚽⬆":
+          log = `[Gol] ${this.log_player} ${this.log_emoji} '${this.log_time}`;
+          break;
+
+        case "⚽⬇":
+          log = `[Gol Contra] ${this.log_player} ${this.log_emoji} '${this.log_time}`;
+          break;
+
+        case "🟨":
+          log = `[Cartão Amarelo] ${this.log_player} ${this.log_emoji} '${this.log_time}`;
+          break;
+
+        case "🟨🟥":
+          log = `[Segundo Cartão Amarelo] ${this.log_player} ${this.log_emoji} '${this.log_time}`;
+          break;
+
+        case "🟥":
+          log = `[Cartão Vermelho] ${this.log_player} ${this.log_emoji} '${this.log_time}`;
+          break;
+        case "🔃":
+          log = `[Substituição] ${this.log_player} ${this.log_emoji} ${this.log_player_second} '${this.log_time}`;
+          break;
+      }
+
       if (this.log_team == 0) {
         this.logs_a.push(log);
       } else {
@@ -246,12 +298,13 @@ export default {
     },
 
     removeLog(i) {
+      console.log(i);
       if (this.log_team == 0) {
         this.logs_a.splice(i, -1);
       } else {
         this.logs_b.splice(i, -1);
       }
-    }
+    },
   },
 };
 </script>

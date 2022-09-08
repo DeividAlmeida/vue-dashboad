@@ -5,7 +5,7 @@
         class="btn btn-primary"
         @click="$emit('changeView', 'MatchsFormComponent')"
       >
-        Adicionar Jogo
+        Adicionar Partida
       </button>
     </div>
     <v-client-table :data="tableData" :columns="columns" :options="options">
