@@ -35,6 +35,12 @@ a {
   text-decoration: none;
 }
 
+#app{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 .VueTables__limit-field {
   margin: 25px;
   width: 25%;

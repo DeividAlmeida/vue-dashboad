@@ -95,7 +95,6 @@
           placeholder="Escolha o dia e horário da patida"
           min="0"
           step="1"
-          required
           v-model="log_time"
         />
       </div>
@@ -166,7 +165,7 @@
             <button
               class="btn btn-danger m-1 fw-bold"
               type="button"
-              @click="removeLog(index)"
+              @click="removeLog(index, 0)"
             >
               X
             </button>
@@ -181,7 +180,7 @@
             <button
               class="btn btn-danger m-1 fw-bold"
               type="button"
-              @click="removeLog(index)"
+              @click="removeLog(index, 1)"
             >
               X
             </button>
@@ -217,7 +216,7 @@ export default {
       log_team: "",
       log_player: "",
       log_player_second: "",
-      log_time: "",
+      log_time: "0",
     };
   },
 
@@ -246,8 +245,8 @@ export default {
       const setData = JSON.stringify({
         team_a: this.team_a,
         team_b: this.team_b,
-        goal_a: this.goal_a,
-        goal_b: this.goal_b,
+        goals_a: this.goal_a,
+        goals_b: this.goal_b,
         logs_a: JSON.stringify(this.logs_a),
         logs_b: JSON.stringify(this.logs_b),
         matchday: this.matchday,
@@ -297,12 +296,11 @@ export default {
       }
     },
 
-    removeLog(i) {
-      console.log(i);
-      if (this.log_team == 0) {
-        this.logs_a.splice(i, -1);
+    removeLog(i, team) {
+      if (team == 0) {
+        this.logs_a.splice(i, 1);
       } else {
-        this.logs_b.splice(i, -1);
+        this.logs_b.splice(i, 1);
       }
     },
   },

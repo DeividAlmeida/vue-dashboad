@@ -9,7 +9,7 @@
       </h3>
       <div class="container">
         <div class="px-md-5">
-          <div class="card-head w-100 m-3">
+          <div class="card-head w-100 my-sm-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="title fw-bold text-center">
@@ -48,7 +48,8 @@ export default {
 </script>
 <style scoped>
 .wrapper {
-  height: 1200px;
+  width: 100%;
+  position: absolute;
 }
 
 .wrapper > div > h3 {
